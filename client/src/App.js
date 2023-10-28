@@ -1,11 +1,26 @@
 import React from 'react'
 
-export default function App() {
+const App = () => {
+ 
   return (
-    <div>
-      <h1>hello</h1>
-      <h2>fdjufbjifgbhj0iew</h2>
-      <h1>i M HrahKLIPK</h1>
-    </div>
-  )
-}
+    <>
+      <NavigationBar />
+      <Slider/>
+      {/* <Buttons/> */}
+      {/* <div style={containerStyles}>
+        <Slider slides={slides} />
+      </div> */}
+       <Home/>
+      <Card/>
+      <div className="container">
+    
+      {/* <Schemes/> */}
+      <Contact/>
+     
+      </div>
+      <Footer/>
+    </>
+  );
+};
+
+export default App;
