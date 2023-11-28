@@ -410,7 +410,161 @@ const Weather = () => {
       suitableSeason: 'Typically grown year-round',
       weatherConditions: 'Requires a warm and humid climate',
     },
-  
+    
+      'Sugarcane': {
+        suitableSeason: 'Kharif (Rainy) season for most regions',
+        weatherConditions: 'Requires high rainfall and warm temperatures',
+      },
+      'Cotton': {
+        suitableSeason: 'Kharif (Rainy) season in most regions',
+        weatherConditions: 'Grows well in warm temperatures with adequate moisture',
+      },
+      'Soybeans': {
+        suitableSeason: 'Kharif (Rainy) season for most regions',
+        weatherConditions: 'Requires high rainfall and warm temperatures',
+      },
+      'Jowar (sorghum)': {
+        suitableSeason: 'Kharif (Rainy) season',
+        weatherConditions: 'Thrives in areas with good rainfall and warm temperatures',
+      },
+      'Bajra (pearl millet)': {
+        suitableSeason: 'Kharif (Rainy) season',
+        weatherConditions: 'Requires moderate rainfall and grows well in warm climates',
+      },
+      'Wheat': {
+        suitableSeason: 'Rabi (Winter) season',
+        weatherConditions: 'Grows in cooler temperatures with moderate rainfall',
+      },
+      'Rice': {
+        suitableSeason: 'Kharif (Rainy) season for most regions',
+        weatherConditions: 'Requires high rainfall and warm temperatures',
+      },
+      'Tur (pigeon pea)': {
+        suitableSeason: 'Kharif (Rainy) season',
+        weatherConditions: 'Depends on good rainfall and warm temperatures',
+      },
+      'Toor dal (split pigeon pea)': {
+        suitableSeason: 'Kharif (Rainy) season',
+        weatherConditions: 'Depends on good rainfall and warm temperatures',
+      },
+      'Groundnut (peanuts)': {
+        suitableSeason: 'Kharif (Rainy) season',
+        weatherConditions: 'Depends on good rainfall and warm temperatures',
+      },
+      'Sunflower': {
+        suitableSeason: 'Kharif (Rainy) season',
+        weatherConditions: 'Depends on good rainfall and warm temperatures',
+      },
+      'Maize': {
+        suitableSeason: 'Kharif (Rainy) season',
+        weatherConditions: 'Depends on good rainfall and warm temperatures',
+      },
+      'Gram (chickpeas)': {
+        suitableSeason: 'Kharif (Rainy) season',
+        weatherConditions: 'Depends on good rainfall and warm temperatures',
+      },
+      'Lentils': {
+        suitableSeason: 'Kharif (Rainy) season',
+        weatherConditions: 'Depends on good rainfall and warm temperatures',
+      },
+      'Sorghum (great millet)': {
+        suitableSeason: 'Kharif (Rainy) season',
+        weatherConditions: 'Depends on good rainfall and warm temperatures',
+      },
+      'Oilseeds (such as soybean, sunflower, and safflower)': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Generally requires warm temperatures and moderate rainfall',
+      },
+      'Grapes (Maharashtra is a major grape-producing region)': {
+        suitableSeason: 'Mostly Kharif (Rainy) season',
+        weatherConditions: 'Thrives in warm and dry climates',
+      },
+      'Mangoes': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Generally needs warm temperatures and moderate to high rainfall',
+      },
+      'Bananas': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Generally needs warm temperatures and moderate to high rainfall',
+      },
+      'Oranges': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Generally needs warm temperatures and moderate to high rainfall',
+      },
+      'Papayas': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Generally needs warm temperatures and moderate to high rainfall',
+      },
+      'Guavas': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Generally needs warm temperatures and moderate to high rainfall',
+      },
+      'Pomegranates': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Generally needs warm temperatures and moderate to high rainfall',
+      },
+      'Citrus fruits (lemons, limes, and oranges)': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Generally needs warm temperatures and moderate to high rainfall',
+      },
+      'Cashew nuts': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Generally needs warm temperatures and moderate to high rainfall',
+      },
+      'Almonds': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Generally needs warm temperatures and moderate to high rainfall',
+      },
+      'Vegetables (various types)': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific vegetable requirements',
+      },
+      'Flowers (for floriculture)': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific flower requirements',
+      },
+      'Spices (including turmeric, red chilli, and cumin)': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific spice requirements',
+      },
+      'Tobacco': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific requirements',
+      },
+      'Coffee (in some regions)': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific coffee-growing regions',
+      },
+      'Tea (in some regions)': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific tea-growing regions',
+      },
+      'Chikoo (Sapodilla)': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific requirements',
+      },
+      'Custard apples': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific requirements',
+      },
+      'Onions': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific requirements',
+      },
+      'Tomatoes': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific requirements',
+      },
+      'Eggplant (brinjal)': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific requirements',
+      },
+      'Potatoes': {
+        suitableSeason: 'Varies',
+        weatherConditions: 'Depends on specific requirements',
+      },
+    
+    
   
     // Add more crop information as needed
   };
