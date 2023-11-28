@@ -5,6 +5,7 @@ import cloud from "../../asset/cloud.png";
 // import { Dropdown } from 'react-bootstrap';
 const Weather = () => {
   const [city, setCity] = useState('');
+  const [Temp, setTemp] = useState(false);
   const [data, setData] = useState({
     description: "",
     temp: 0,
@@ -579,7 +580,7 @@ const Weather = () => {
     setCropInfo(cropTypes[event.target.value]);
   }
 
-  const handleCitySearch = () => {
+  const handleclick = () => {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8fc7db9ef3e1a9c9d04ade2367f1651e`)
       .then((response) => {
         setData({
@@ -593,87 +594,122 @@ const Weather = () => {
           sunset: response.data.sys.sunset,
           wind: response.data.wind.speed,
         });
+        setTemp(true);
       });
   }
 
   return (
     <div className="container mt-5" style={{ marginTop: "40px" }}>
-      <div className="weatherContainer mt-5 mb-5">
-        <div className="row main darkGreenbg d-flex justify-content-center mt-5">
-          <div className="col-md-4 leftdiv mt-5 mb-5">
-            <div className="content border w-100 bg-white p-3 m-0">
-              <div className="header d-flex justify-content-center p-2">
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  placeholder="Search location"
-                  className="border serachInput"
-                  value={city} onChange={(e) => { setCity(e.target.value) }}
-                />
-                <button className="btn btn-success circular-button" onClick={handleCitySearch}>
-                  <i className="fas fa-search"></i>
-                </button>
-              </div>
-              <div className="weatherImg p-1">
-                <img src={cloud} alt="" />
-              </div>
-              <div className="d-flex justify-content-center">
-                <span className='text-success '> {data.description}</span>
-              </div>
-              <div className="p-2">
-                <div className="temp d-flex justify-content-center p-1 ">
-                  <h3 className="font-weight-bold darkGreenText">{(data.temp - 273.15).toFixed(2)}°C</h3>
+      <div className="weatherContainer  mt-5 mb-5">
+          {/* row  */}
+          <div className="row main darkGreenbg d-flex justify-content-center mt-5">
+            {/* for left div  */}
+            <div className="col-md-4 leftdiv  mt-5 mb-5">
+              <div className="content border w-100 bg-white  p-3 m-0  ">
+                <div className="header d-flex justify-content-center p-2">
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder="search location"
+                    className="border serachInput "
+                    value={city}
+                    onChange={(e) => {
+                      setCity(e.target.value);
+                    }}
+                  />
+                  <button
+                    className="btn btn-success circular-button"
+                    onClick={handleclick}
+                  >
+                    <i className="fas fa-search"></i>
+                  </button>
                 </div>
-                <div className="temp d-flex justify-content-center  ">
-                  <h4 className="lightGreenText">{city}</h4>
+                <div className="weatherImg p-1">
+                  <img src={cloud} alt="" /> br
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 shadow-sm  mb-5 bg-white rounded  mt-5 mb-5">
-            <div className="row">
-              <div className="col-md-6">
-                <div class="card p-1">
-                  <div class="card-body">
-                    <h6>Temp Min</h6>
-                    <span className='text-success'>{(data.temp_min - 273.15).toFixed(2)} °C</span>
+                <div className="d-flex justify-content-center">
+                  <span className="text-success ">
+                    {" "}
+                    {Temp ? data.description : null}
+                  </span>
+                </div>
+
+                <div className="p-2">
+                  <div className="temp d-flex justify-content-center p-1 ">
+                    <h3 className="font-weight-bold darkGreenText">
+                      {Temp ? (data.temp - 273.15).toFixed(2) : null}°C
+                    </h3>
                   </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div class="card p-1">
-                  <div class="card-body">
-                    <h6>Temp Max</h6>
-                    <span className='text-success'>{(data.temp_max - 273.15).toFixed(2)} °C</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div class="card p-1">
-                  <div class="card-body">
-                    <h6>Humidity</h6>
-                    <span className='text-success'>{data.humidity}</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div class="card p-1">
-                  <div class="card-body">
-                    <h6>Wind Speed</h6>
-                    <span className='text-success'>{data.wind}</span>
+                  <div className="temp d-flex justify-content-center  ">
+                    <h4 className="lightGreenText">{city.toUpperCase()}</h4>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div class="card  p-1 w-100">
-                <div class="card-body">this is</div>
+
+            {/* for right div  */}
+
+            <div className="col-md-6 shadow-sm  mb-5 bg-white rounded  mt-5 mb-5">
+              <div className="row justify-content-center mt-2 mb-2">
+                <div className="col-md-5 m-1">
+                  <div class="card p-1 shadow-sm ">
+                    <div class="card-body">
+                      <h6>Temp Min</h6>{" "}
+                      <span className="text-success">
+                        {Temp ? (data.temp_min - 273.15).toFixed(2) : null} °C
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-5 m-1">
+                  <div class="card p-1 shadow-sm">
+                    <div class="card-body ">
+                      <h6>Temp Max </h6>
+                      <span className="text-success">
+                        {Temp ? (data.temp_max - 273.15).toFixed(2) : null} °C
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-5 m-1">
+                  <div class="card p- shadow-sm1">
+                    <div class="card-body">
+                      <h6>Humidity </h6>
+                      <span className="text-success">{data.humidity} %</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-5 m-1">
+                  <div class="card p-1 shadow-sm">
+                    <div class="card-body">
+                      <h6>Wind Speed </h6>
+                      <span className="text-success">{data.wind} Km/h</span>
+                    </div>
+                  </div>
+                </div>
+                {/* <div className="col-md-6">
+                  <div class="card p-1">
+                    <div class="card-body"><h6>Day Type </h6> </div>
+                    <span className='text-success'>{data.temp_min}</span>
+                  </div>
+                </div> */}
+              </div>
+              <div className="row justify-content-center my-2">
+                <div className="col-md-10">
+                  <div class="card  p-1 shadow-sm">
+                    <div class="card-body text-success text-center">
+                      this is for next 10 days tempreture
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       <div className="mt-5 text-center">
         <h2 className="mt-3 darkGreenText font-weight-bolder">
           Get Crop Suggestion Here

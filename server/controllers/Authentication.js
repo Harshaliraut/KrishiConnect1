@@ -1,5 +1,5 @@
 const User = require("../model/User");
-
+const AddGovSchemes = require("../model/AddGovSchemes");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
@@ -17,7 +17,35 @@ require("dotenv").config();
 const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();
 };
+//below function is for adding government schemes
+const addgovschemes = async (req, res) =>{
+  const {name, details, state, type, category, link} = req.body;
 
+  if (!name || !details || !state || !type || !category || !link) {
+     return res.status(200).json({ message: "All input fields are required" }); 
+    }
+    try{
+      // const schemeExist = await AddGovSchemes.findOne({ name: name });
+      // if(schemeExist){
+      //   return res.status(400).json({error: "Scheme already Exist"});
+      // }else {
+        const scheme = new AddGovSchemes({name, details, state, type, category, link});
+        await scheme.save();
+        res.status(201).json({ message: "Scheme successfully added"});
+
+        //finds all the data present in that collection
+        const allData = await AddGovSchemes.find({})
+
+        //collects all the data from database and passes to frontend
+        res.json(allData)
+
+      // }
+    } catch (err){
+      console.log(err);
+
+      console.log("fail")
+    }
+}
 // below fuction is for registration  
 const register = async (req, res, next) => {
  
@@ -59,11 +87,13 @@ const register = async (req, res, next) => {
     // Create user in our database
     const user = await User.create({
       fullname,
+      name:fullname,
       email: email.toLowerCase().trim(), // sanitize: convert email to lowercase
       password: encryptedPassword,
-      role,
-      phoneno,
-      city
+      roleganesh:role,
+      role:role,
+      phone:phoneno,
+      address:city
 
     });
 
@@ -202,7 +232,7 @@ const login = async (req, res, next) => {
 
       // save user token
       user.token = token;
-      // await user.save();
+      await user.save();
     // user
       return res.status(200).json(user);
     } else {
@@ -299,6 +329,17 @@ const resetpassword = async(req, res, next) => {
   }
 };
 
+const getContextData = async(req,res)=>{
+  try {
+    const user = await User.findById(req.params.id);
+    console.log("context value");
+    res.json(user);
+    // console.log(res.json(product))
+  } catch (error) {
+    res.json({ message: error });
+  }
+}
+
 const wlcom = async (req, res, next) => {
   try {
     const data = await User.findById(req.user.user_id);
@@ -311,6 +352,21 @@ const wlcom = async (req, res, next) => {
   return;
 };
 
+// get gove scheme 
+
+const getgovschemes = async (req, res, next) => {
+  // res.send("login Route");
+  try {
+    // Get user input
+   const allData = await AddGovSchemes.find({})
+       return res.status(200).json(allData)
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: "Internal get scheme error" });
+  }
+};
+
+
 // if now route is found then this route is run
 const noRouteFound = (req, res) => {
   res.status(404).json({
@@ -322,13 +378,27 @@ const noRouteFound = (req, res) => {
     },
   });
 };
+
+const uploadFile = (req, res) => {
+   if (req.file) {
+    res.json({ message: 'File uploaded successfully' });
+  } else {
+    res.status(400).json({ message: 'No file uploaded' });
+  }
+
+};
+
 module.exports = {
+  addgovschemes,
   register,
   sendOtp,
   login,
   forgotpassword,
   resetpassword,
   wlcom,
+  getgovschemes,
   noRouteFound,
   verifyOtp,
+  getContextData,
+  uploadFile
 };

@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-scroll";
-
+import { useUserContext } from '../context/UserContext';
 import { useState , useEffect } from "react";
 import axios from "axios";
 import { Link as RouterLink , useNavigate } from "react-router-dom";
@@ -10,11 +10,12 @@ import '../css/NavigationBar.css'
 const NavigationBar = () => {
   const navigate = useNavigate();
 // State to store form data
+const { setUserContext } = useUserContext();
 const [formData, setFormData] = useState({
   fullname: "",
   email: "",
   password: "",
-  role:"",
+  role: null ,
   phoneno:"",
   city : "",
 
@@ -109,28 +110,28 @@ const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
 
-  // const GetUser = async () => {
-  //   // set loading true
-  //   setLoading(true);
-  //   try {
-  //     const response = await axios.get("http://localhost:8800/api", {
-  //       headers: {
-  //         Authorization: `${localStorage.getItem("access_token")}`,
-  //       },
-  //     });
-  //     console.log("data in navbar");
-  //     RessetData(response.data);
+  const GetUser = async () => {
+    // set loading true
+    setLoading(true);
+    try {
+      const response = await axios.get("http://localhost:8800/api", {
+        headers: {
+          Authorization: `${localStorage.getItem("access_token")}`,
+        },
+      });
+      console.log("data in navbar");
+      RessetData(response.data);
       
-  //     // setUserContext(response.data);
-  //     //  set loading false
-  //     setLoading(false);
-  //     // set authentication complete
-  //     setauth(true);
-  //   } catch (e) {
-  //     console.log(e);
-  //     setLoading(false);
-  //   }
-  // };
+      await setUserContext(response.data);
+      //  set loading false
+      setLoading(false);
+      // set authentication complete
+      setauth(true);
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  };
 
   // logout 
   const handleLogout = () => {
@@ -154,7 +155,7 @@ const [loading, setLoading] = useState(false);
       if (!localStorage.getItem("access_token")) {
         // Navigate("/");
       } else {
-        // GetUser();
+        GetUser();
       }
     },
     [login] // add dependency when login set then online render componenet again and again
@@ -174,6 +175,7 @@ const [loading, setLoading] = useState(false);
         RessetData(data.data);
         const user = data.data;
         localStorage.setItem('access_token', user.token);
+        setUserContext(data.data.user);
        
       }
     } catch (error) {
@@ -249,7 +251,7 @@ const [loading, setLoading] = useState(false);
                   <div className="tooltip-container">
                     <button
                       type="button"
-                      className="btn btn-outline-success shadow-none "
+                      className="btn btn-outline-success shadow-none px-2 py-1 "
                     >
                       {Resdata.fullname}
                     </button>
@@ -396,9 +398,10 @@ const [loading, setLoading] = useState(false);
               <option value="none" >
                Type
               </option>
-              <option value="fbs">Farmer/Buyer/Seller</option>
-              <option value="expert">Agriculture Expert</option>
-              <option value="admin">Admin</option>
+              <option value="1">Farmer/Buyer</option>
+              <option value="1">Seller</option>
+              <option value="2">Agriculture Expert</option>
+              <option value="3">Admin</option>
 
             </select>
           </div>
